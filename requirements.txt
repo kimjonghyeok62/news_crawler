@@ -1,0 +1,10 @@
+flask
+pandas
+selenium
+webdriver-manager
+feedparser
+beautifulsoup4
+requests
+xlsxwriter
+python-docx
+gunicorn

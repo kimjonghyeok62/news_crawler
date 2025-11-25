@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>통합 뉴스 크롤러 Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📰 통합 뉴스 크롤러 Web</h1>
+            <p>보도자료 수집 및 뉴스 통합 검색 시스템</p>
+        </header>
+
+        <!-- Step 1: Press Releases -->
+        <section class="card">
+            <div class="card-header">
+                <h2>Step 1. 보도자료 목록 (광주하남교육지원청)</h2>
+            </div>
+            <div class="card-body">
+                <div class="controls">
+                    <button id="btn-fetch-press" class="btn primary">전체 목록 가져오기</button>
+                    <button id="btn-fetch-press-today" class="btn secondary">오늘 날짜만 가져오기</button>
+                    <button id="btn-export-press-excel" class="btn success" disabled>엑셀 다운로드</button>
+                </div>
+                <div class="table-wrapper">
+                    <table id="table-press">
+                        <thead>
+                            <tr>
+                                <th>날짜</th>
+                                <th>제목</th>
+                                <th>추천 키워드</th>
+                                <th>링크</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="4" class="empty">데이터가 없습니다.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2: News Search -->
+        <section class="card">
+            <div class="card-header">
+                <h2>Step 2. 뉴스 통합 검색</h2>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>검색어 (쉼표로 구분)</label>
+                    <input type="text" id="input-keywords" placeholder="예: 광주하남, 교육장, 학교명...">
+                </div>
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label>최근 N일</label>
+                        <input type="number" id="input-days" value="1" min="1">
+                    </div>
+                    <div class="form-group half">
+                        <label>검색 대상</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" value="google" checked> Google 뉴스</label>
+                            <label><input type="checkbox" value="major6" checked> 주요 6대 지방지</label>
+                            <label><input type="checkbox" value="other16" checked> 기타 지방지</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <button id="btn-search-news" class="btn primary large">뉴스 검색 시작</button>
+                </div>
+
+                <div id="progress-area" class="hidden">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <p id="progress-text">준비 중...</p>
+                </div>
+
+                <div class="controls hidden" id="result-controls">
+                    <button id="btn-export-news-excel" class="btn success">엑셀 다운로드</button>
+                    <button id="btn-export-news-word" class="btn info">Word 다운로드</button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="table-news">
+                        <thead>
+                            <tr>
+                                <th>보도일</th>
+                                <th>매체</th>
+                                <th>제목</th>
+                                <th>링크</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="4" class="empty">검색 결과가 없습니다.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
